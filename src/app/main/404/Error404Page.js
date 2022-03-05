@@ -33,7 +33,6 @@ function Error404Page() {
                         className="mb-16 font-normal"
                     >
                         Sorry but we could not find the page you are looking for
-                        !
                     </Typography>
                 </motion.div>
             </div>
