@@ -461,6 +461,74 @@ function Form(props) {
                                     />
                                 );
                             }
+                            case "multipleSelect": {
+                                const filterOptions =
+                                    typeof f.option == "string"
+                                        ? options?.[
+                                              `options_${f.field}_${f.option}`
+                                          ]
+                                        : options?.[`options_${f.field}_array`];
+                                return (
+                                    <Controller
+                                        key={f.field}
+                                        name={f.field}
+                                        control={control}
+                                        render={({ field }) => (
+                                            <FormControl
+                                                variant="outlined"
+                                                fullWidth
+                                                className={classes.formControl}
+                                            >
+                                                <InputLabel
+                                                    id={`select-label-${f.field}`}
+                                                >
+                                                    {f.label}
+                                                </InputLabel>
+                                                <Select
+                                                    labelId={`select-label-${f.field}`}
+                                                    id={`select-select-${f.field}`}
+                                                    className="mt-8 mb-16"
+                                                    onChange={(e) => {
+                                                        field.onChange(e);
+                                                        handleSelectChange(
+                                                            e,
+                                                            f.field
+                                                        );
+                                                    }}
+                                                    {...f.required}
+                                                    value={
+                                                        getValues(f.field) ?? []
+                                                    }
+                                                    renderValue={(selected) =>
+                                                        selected.join(", ")
+                                                    }
+                                                    multiple
+                                                >
+                                                    {isNew ? (
+                                                        <MenuItem value="">
+                                                            <em>
+                                                                --Select{" "}
+                                                                {`${f.label}`}
+                                                                --
+                                                            </em>
+                                                        </MenuItem>
+                                                    ) : null}
+                                                    {filterOptions?.map((o) => (
+                                                        <MenuItem
+                                                            key={o.Value}
+                                                            value={o.Value}
+                                                        >
+                                                            <em>
+                                                                {o.DisplayText}
+                                                            </em>
+                                                        </MenuItem>
+                                                    ))}
+                                                </Select>
+                                            </FormControl>
+                                        )}
+                                    />
+                                );
+                            }
                             case "checkbox": {
                                 return (
                                     <Controller
