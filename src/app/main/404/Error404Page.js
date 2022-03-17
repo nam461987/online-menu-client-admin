@@ -19,7 +19,7 @@ function Error404Page() {
                         color="inherit"
                         className="font-medium mb-16"
                     >
-                        404
+                        404!
                     </Typography>
                 </motion.div>
 
